@@ -1,0 +1,44 @@
+version: "3.8"
+services:
+  postgressbacklink:
+    container_name: postgressbacklink
+    hostname: postgressbacklink
+    image: postgres:latest
+    env_file:
+      - BackLinkMain/docker.env
+    ports:
+      - "5445:5432"
+    volumes:
+      - "postgresql-data-backlink:/var/lib/postgresql/data"
+    networks:
+      - main_backlink
+    command: -p 5445
+  app_backlink:
+    container_name: app_backlink
+    hostname: app_backlink
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - BackLinkMain/docker.env
+    volumes:
+      - static-data-backlink:/srv/public
+      - .:/srv/app_backlink
+    expose:
+      - 8012
+    depends_on:
+      - postgressbacklink
+    command: gunicorn BackLinkMain.wsgi:application --bind 0.0.0.0:8012
+    networks:
+      - main_backlink
+      - bridge_network
+
+networks:
+  main_backlink:
+  bridge_network:
+    name: nginx_network
+    driver: bridge
+
+volumes:
+  postgresql-data-backlink:
+  static-data-backlink:
