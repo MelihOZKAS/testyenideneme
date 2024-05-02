@@ -25,6 +25,4 @@ from django.contrib.sitemaps.views import index, sitemap
 urlpatterns = [
     path("yonetici/", admin.site.urls),
     path("", include("Seo.urls")),
-
-
 ]
