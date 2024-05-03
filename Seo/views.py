@@ -108,6 +108,7 @@ def EnderunNew(request, post_slug):
         # Masaüstü cihaz ise normal sayfaya yönlendir
         return HttpResponse(f'Sitemiz Şu an Yapımda')
 
+
 @csrf_exempt
 def mahsulyakala(request):
     if request.method == 'POST':
