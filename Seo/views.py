@@ -9,6 +9,9 @@ from django.utils import timezone
 import re
 from django.views import View
 from .models import *
+import json
+from django.db import IntegrityError
+from django.http import JsonResponse
 
 def home3(request):
     user_agent = request.META.get('HTTP_USER_AGENT').lower()
@@ -104,3 +107,32 @@ def EnderunNew(request, post_slug):
     else:
         # Masaüstü cihaz ise normal sayfaya yönlendir
         return HttpResponse(f'Sitemiz Şu an Yapımda')
+
+@csrf_exempt
+def mahsulyakala(request):
+    if request.method == 'POST':
+        if request.headers.get('Content-Type') == 'application/json':
+            data = json.loads(request.body)
+            for item in data:
+                Main_Link = item.get('Main_Link')
+                Post_Link = item.get('Post_Link')
+                try:
+                    mahsulkayit = Mahsul(Tarla_Link=Main_Link, Mahsul_Link=Post_Link, Akibeti='Beklemede')
+                    mahsulkayit.save()
+                except IntegrityError:
+                    continue  # Bu satırı ekledim.
+            return JsonResponse({"message": "Başarılı"})
+        else:
+            return JsonResponse({"error": "Geçersiz Content-Type başlığı"}, status=400)
+    else:
+        return JsonResponse({"method": request.method, "headers": dict(request.headers)})
+
+@csrf_exempt
+def mahsullistesicek(request):
+    if request.method == 'POST':
+        tarla_link = request.POST.get('Tarla_Link')
+        mahsul_list = Mahsul.objects.filter(Tarla_Link=tarla_link).order_by('-olusturma_tarihi')[:150]
+        mahsul_links = "|".join([mahsul.Mahsul_Link for mahsul in mahsul_list])
+        return HttpResponse(mahsul_links)
+    else:
+        return HttpResponse("Geçersiz istek", status=400)
