@@ -22,6 +22,7 @@ from django.contrib.sitemaps.views import index, sitemap
 #from .sitemaps import *
 #from Hepsi.views import *
 
+
 urlpatterns = [
     path("yonetici/", admin.site.urls),
     path("", include("Seo.urls")),
