@@ -179,12 +179,13 @@ def post_add(request):
         key = request.POST.get('keywords')
         Kaynak_Linki = request.POST.get('Kaynak_Linki')
         Kaynak_Dili = request.POST.get('Kaynak_Dili')
+        Kaynak_Ana_Link = request.POST.get('Kaynak_Ana_Link')
 
         Post_Turu_Gelen = PostKategori.objects.get(Title=Post_Turu)
 
 
         title, slug = create_unique_title_slug(title)
-        siir_masal = Kontrol(title=title,  slug=slug, h1=h1, Post_Turu=Post_Turu_Gelen, icerik=icerik, keywords=key, meta_description=meta_description, Akibeti="Beklemede", Kaynak_Linki=Kaynak_Linki, Kaynak_Dili=Kaynak_Dili)
+        siir_masal = Kontrol(title=title,  slug=slug, h1=h1, Post_Turu=Post_Turu_Gelen, icerik=icerik, keywords=key, meta_description=meta_description, Akibeti="Beklemede", Kaynak_Linki=Kaynak_Linki, Kaynak_Dili=Kaynak_Dili, Kaynak_Ana_Link=Kaynak_Ana_Link)
         siir_masal.save()
         if siir_masal.id is None:
             return HttpResponse("Post kaydedilemedi.")
