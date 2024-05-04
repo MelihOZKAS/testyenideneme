@@ -47,11 +47,11 @@ admin.site.register(DomainBacklink, BekleyenAdmin)
 
 
 
-#class BackEndDOmain(admin.ModelAdmin):
-#    list_display = ("Title",)
-#
-#admin.site.register(BackEndDOmain, BackEndDOmain)
-#
+class BackEndDOmainAdmin(admin.ModelAdmin):
+    list_display = ("Title",)
+
+admin.site.register(BackEndDomain, BackEndDOmainAdmin)
+
 
 
 
