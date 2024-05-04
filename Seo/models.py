@@ -70,7 +70,13 @@ class DomainBacklink(models.Model):
         verbose_name_plural = "1-DomainBacklink"
 
 
-
+class BackEndDomain(models.Model):
+    Title = models.CharField(max_length=255, blank=True)
+    Kaynak_Ana_link = models.URLField(blank=True, null=True, unique=True)
+    class Meta:
+        verbose_name_plural = "2-BackEndDomain"
+    def __str__(self):
+        return self.Title
 
 
 
@@ -118,6 +124,8 @@ class Kontrol(models.Model):
         ('Kullanma', 'Kullanma'),
     ]
 
+
+
     Dili = [
         ('ENG', 'ENG'),
         ('TR', 'TR'),
@@ -139,7 +147,7 @@ class Kontrol(models.Model):
     Akibeti = models.CharField(max_length=255, choices=kontrol, null=True, blank=True)
     Kaynak_Dili = models.CharField(max_length=255, choices=Dili, null=True, blank=True)
     Kaynak_Linki = models.URLField(blank=True, null=True)
-    Kaynak_Ana_link = models.URLField(blank=True, null=True)
+    Kaynak_Ana_link = models.ForeignKey(BackEndDomain, blank=True)
     olusturma_tarihi = models.DateTimeField(auto_now_add=True)
     cocukmasali = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     kidsStories = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
