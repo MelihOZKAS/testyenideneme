@@ -139,6 +139,7 @@ class Kontrol(models.Model):
     Akibeti = models.CharField(max_length=255, choices=kontrol, null=True, blank=True)
     Kaynak_Dili = models.CharField(max_length=255, choices=Dili, null=True, blank=True)
     Kaynak_Linki = models.URLField(blank=True, null=True)
+    Kaynak_Ana_link = models.URLField(blank=True, null=True)
     olusturma_tarihi = models.DateTimeField(auto_now_add=True)
     cocukmasali = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     kidsStories = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
