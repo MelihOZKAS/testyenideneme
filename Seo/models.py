@@ -96,7 +96,7 @@ class PostKategori(models.Model):
     class Meta:
         verbose_name_plural = "2-Post Kategori"
     def __str__(self):
-        return self.short_title
+        return self.Title
 
 
 
