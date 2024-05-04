@@ -46,6 +46,15 @@ class BekleyenAdmin(admin.ModelAdmin):
 admin.site.register(DomainBacklink, BekleyenAdmin)
 
 
+
+class BackEndDOmain(admin.ModelAdmin):
+    list_display = ("domain","backlink","Durum","yayin_tarihi")
+
+admin.site.register(BackEndDOmain, BackEndDOmain)
+
+
+
+
 class KategoriAdmin(admin.ModelAdmin):
     list_display = ("Title","slug","description","description_length","keywords","Aktif",)
     prepopulated_fields = {'slug': ('Title',)}
