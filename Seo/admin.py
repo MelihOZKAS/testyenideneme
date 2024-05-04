@@ -67,7 +67,7 @@ admin.site.register(PostKategori, KategoriAdmin)
 
 
 class KontrolAdmin(admin.ModelAdmin):
-    list_display = ("title", "slug", "kelime_sayisi", "meta_description", "hikayeyi_gor", "Post_Turu","Akibeti", "keywords",)
+    list_display = ("title", "slug", "kelime_sayisi", "meta_description", "hikayeyi_gor", "Post_Turu","Akibeti", "keywords", "Kaynak_Ana_Link", )
     search_fields = ("title",)
     list_filter = ("Akibeti", "Kaynak_Ana_Link", )
     list_editable = ("Post_Turu", "Akibeti", )
