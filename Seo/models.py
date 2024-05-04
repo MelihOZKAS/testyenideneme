@@ -72,7 +72,7 @@ class DomainBacklink(models.Model):
 
 class BackEndDomain(models.Model):
     Title = models.CharField(max_length=255, blank=True)
-    Kaynak_Ana_link = models.URLField(blank=True, null=True, unique=True)
+    Kaynak_Ana_link = models.CharField(max_length=600, blank=True, null=True, unique=True)
     class Meta:
         verbose_name_plural = "2-BackEndDomain"
     def __str__(self):
