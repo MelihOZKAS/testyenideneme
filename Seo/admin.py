@@ -48,7 +48,7 @@ admin.site.register(DomainBacklink, BekleyenAdmin)
 
 
 class BackEndDOmain(admin.ModelAdmin):
-    list_display = ("domain","backlink","Durum","yayin_tarihi")
+    list_display = ("Title",)
 
 admin.site.register(BackEndDOmain, BackEndDOmain)
 
