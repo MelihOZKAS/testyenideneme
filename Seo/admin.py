@@ -79,7 +79,7 @@ class KontrolAdmin(admin.ModelAdmin):
     list_display = ("title", "slug", "kelime_sayisi", "meta_description", "hikayeyi_gor", "Post_Turu","Akibeti", "keywords", )
     search_fields = ("title",)
     list_filter = ("Akibeti", "Kaynak_Ana_link", "Post_Turu" )
-    list_editable = ("Post_Turu", "Akibeti", )
+    list_editable = ("Post_Turu", "Akibeti", "Post_Turu" )
 
     def hikayeyi_gor(self, obj):
         return format_html('<a target="_blank" style="padding: 5px 10px; background-color: #198754; color: white; text-decoration: none; display: inline-block; text-align: center; border-radius: 5px;" href="/story-preview/{}">Post Gör</a>', obj.slug)
