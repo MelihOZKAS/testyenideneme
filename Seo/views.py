@@ -11,7 +11,8 @@ from .models import *
 import json
 from django.db import IntegrityError
 from django.http import JsonResponse
-from django.utils.html import strip_tags
+from html import unescape
+
 
 def home3(request):
     user_agent = request.META.get('HTTP_USER_AGENT').lower()
@@ -203,12 +204,12 @@ def get_random_kontrol(request):
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            icerik = strip_tags(random_kontrol.icerik)  # HTML etiketlerini kaldır
+            icerik = unescape(random_kontrol.icerik)  # HTML karakter referanslarını dönüştür
             data = {
                 'id': random_kontrol.id,
                 'title': random_kontrol.title,
                 'h1': random_kontrol.h1,
-                'icerik': icerik,  # HTML etiketleri kaldırılmış içerik
+                'icerik': icerik,  # HTML karakter referansları dönüştürülmüş içerik
                 # Diğer alanları da buraya ekleyebilirsiniz
             }
             return JsonResponse(data)
