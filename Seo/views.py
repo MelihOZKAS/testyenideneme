@@ -199,13 +199,13 @@ def post_add(request):
 def get_random_kontrol(request):
     if request.method == 'POST':
         field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
-        kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
+        kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'}).order_by('?').first()
         if kontrols.exists():
-            random_kontrol = kontrols.order_by('?').first()
+
             data = {
-                'id': random_kontrol.id,
-                'title': random_kontrol.title,
-                'h1': random_kontrol.h1,
+                'id': kontrols.id,
+                'title': kontrols.title,
+                'h1': kontrols.h1,
                 # Diğer alanları da buraya ekleyebilirsiniz
             }
             return JsonResponse(data)
