@@ -13,7 +13,6 @@ from django.db import IntegrityError
 from django.http import JsonResponse
 from django.utils.html import strip_tags
 from html import unescape
-import codecs
 
 
 def home3(request):
@@ -201,22 +200,11 @@ def post_add(request):
 @csrf_exempt
 def get_random_kontrol(request):
     if request.method == 'POST':
-        field = request.POST.get(
-            'field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
+        field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            icerik = unescape(
-                strip_tags(random_kontrol.icerik))  # HTML etiketlerini kaldır ve HTML karakter referanslarını dönüştür
-            icerik = codecs.decode(icerik, 'unicode_escape')  # Unicode kaçış dizelerini dönüştür
-            data = {
-                'id': random_kontrol.id,
-                'title': random_kontrol.title,
-                'h1': random_kontrol.h1,
-                'icerik': icerik,
-                # HTML etiketleri kaldırılmış, HTML karakter referansları ve unicode kaçış dizeleri dönüştürülmüş içerik
-                # Diğer alanları da buraya ekleyebilirsiniz
-            }
-            return JsonResponse(data)
+            Sonucu = random_kontrol.icerik
+            return HttpResponse(Sonucu)
         else:
             return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
