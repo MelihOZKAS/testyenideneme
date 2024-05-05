@@ -10,7 +10,6 @@ import re
 from django.views import View
 from .models import *
 import json
-from random import choice
 from django.db import IntegrityError
 from django.http import JsonResponse
 
@@ -197,17 +196,16 @@ def post_add(request):
 
 
 @csrf_exempt
-def aiPostCek(request):
+def get_random_kontrol(request):
     if request.method == 'POST':
-        field = request.POST.get(
-            'field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
-        kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
-        if kontrols:
-            random_kontrol = choice(kontrols)
+        field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
+        kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'}).order_by('?').first()
+        if kontrols.exists():
+
             data = {
-                'id': random_kontrol.id,
-                'title': random_kontrol.title,
-                'h1': random_kontrol.h1,
+                'id': kontrols.id,
+                'title': kontrols.title,
+                'h1': kontrols.h1,
                 # Diğer alanları da buraya ekleyebilirsiniz
             }
             return JsonResponse(data)
