@@ -11,6 +11,7 @@ from .models import *
 import json
 from django.db import IntegrityError
 from django.http import JsonResponse
+from django.utils.html import strip_tags
 from html import unescape
 
 
@@ -199,17 +200,16 @@ def post_add(request):
 @csrf_exempt
 def get_random_kontrol(request):
     if request.method == 'POST':
-        field = request.POST.get(
-            'field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
+        field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            icerik = unescape(random_kontrol.icerik)  # HTML karakter referanslarını dönüştür
+            icerik = unescape(strip_tags(random_kontrol.icerik))  # HTML etiketlerini kaldır ve HTML karakter referanslarını dönüştür
             data = {
                 'id': random_kontrol.id,
                 'title': random_kontrol.title,
                 'h1': random_kontrol.h1,
-                'icerik': icerik,  # HTML karakter referansları dönüştürülmüş içerik
+                'icerik': icerik,  # HTML etiketleri kaldırılmış ve HTML karakter referansları dönüştürülmüş içerik
                 # Diğer alanları da buraya ekleyebilirsiniz
             }
             return JsonResponse(data)
