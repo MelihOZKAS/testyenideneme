@@ -1,5 +1,4 @@
 from django.shortcuts import render,HttpResponse,get_object_or_404,reverse
-
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.text import slugify
 from django.core.paginator import Paginator
@@ -12,6 +11,7 @@ from .models import *
 import json
 from django.db import IntegrityError
 from django.http import JsonResponse
+from django.utils.html import strip_tags
 
 def home3(request):
     user_agent = request.META.get('HTTP_USER_AGENT').lower()
@@ -198,15 +198,17 @@ def post_add(request):
 @csrf_exempt
 def get_random_kontrol(request):
     if request.method == 'POST':
-        field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
+        field = request.POST.get(
+            'field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
+            icerik = strip_tags(random_kontrol.icerik)  # HTML etiketlerini kaldır
             data = {
                 'id': random_kontrol.id,
                 'title': random_kontrol.title,
                 'h1': random_kontrol.h1,
-                'icerik': random_kontrol.icerik,
+                'icerik': icerik,  # HTML etiketleri kaldırılmış içerik
                 # Diğer alanları da buraya ekleyebilirsiniz
             }
             return JsonResponse(data)
