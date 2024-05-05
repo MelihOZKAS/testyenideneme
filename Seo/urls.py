@@ -7,6 +7,7 @@ urlpatterns = [
     path("mahsul-listesi-cek/", views.mahsullistesicek),
     path("add-post/", views.post_add),
     path("mahsul-cek/", views.mahsulcek),
+    path("ai-cek/", views.aiPostCek),
     path('story-preview/<slug:slug>/', views.StoryPreviewView.as_view(), name='story_preview'),
     path('<str:post_slug>/', views.Enderun, name='post-getir'),#Blog Git
     path('new/<str:post_slug>/', views.EnderunNew, name='post-getir-new'),#Blog Git

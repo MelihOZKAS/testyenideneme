@@ -10,6 +10,7 @@ import re
 from django.views import View
 from .models import *
 import json
+from random import choice
 from django.db import IntegrityError
 from django.http import JsonResponse
 
@@ -192,3 +193,23 @@ def post_add(request):
             return HttpResponse("Post kaydedilemedi.")
         else:
             return HttpResponse("Post başarıyla kaydedildi. ID: " + str(siir_masal.id))
+
+
+
+@csrf_exempt
+def aiPostCek(request):
+    if request.method == 'POST':
+        field = request.POST.get(
+            'field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
+        kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
+        if kontrols:
+            random_kontrol = choice(kontrols)
+            data = {
+                'id': random_kontrol.id,
+                'title': random_kontrol.title,
+                'h1': random_kontrol.h1,
+                # Diğer alanları da buraya ekleyebilirsiniz
+            }
+            return JsonResponse(data)
+        else:
+            return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
