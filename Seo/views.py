@@ -206,6 +206,7 @@ def get_random_kontrol(request):
                 'id': random_kontrol.id,
                 'title': random_kontrol.title,
                 'h1': random_kontrol.h1,
+                'icerik': random_kontrol.icerik,
                 # Diğer alanları da buraya ekleyebilirsiniz
             }
             return JsonResponse(data)
