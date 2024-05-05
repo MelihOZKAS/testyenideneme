@@ -204,7 +204,7 @@ def get_random_kontrol(request):
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            Sonucu = random_kontrol.icerik
+            Sonucu = f"{mahsul_cek.pk}|={mahsul_cek.title}|={mahsul_cek.h1}|={mahsul_cek.Post_Turu}|={mahsul_cek.meta_description}|={mahsul_cek.keywords}|={mahsul_cek.icerik}|={mahsul_cek.Kaynak_Linki}"
             return HttpResponse(Sonucu)
         else:
             return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
