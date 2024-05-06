@@ -109,8 +109,10 @@ class PostKategori(models.Model):
 class Kontrol(models.Model):
     kontrol = [
         ('Beklemede', 'Beklemede'),
-        ('MakaleYap', 'MakaleYap'),
         ('AltBaslikYap', 'AltBaslikYap'),
+        ('AltBaslikKontrol', 'AltBaslikKontrol'),
+        ('MakaleYap', 'MakaleYap'),
+        ('MakaleKontrol', 'MakaleKontrol'),
         ('KullanimaHazir', 'KullanimaHazir'),
         ('Tamamlandi', 'Tamamlandi'),
         ('YoldaAltBaslik', 'YoldaAltBaslik'),

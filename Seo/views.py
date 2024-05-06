@@ -252,15 +252,14 @@ def ai_add(request):
 def ai_alt_baslik_add(request):
     if request.method == 'POST':
         # Gelen POST isteğindeki değerleri alın
-        ZekaOzet = request.POST.get('ZekaOzet')
-        icerik = request.POST.get('icerik')
         GelenID = request.POST.get('GelenID')
+        Alt = request.POST.get('Alt')
+
 
 
         Postislem = Kontrol.objects.get(pk=GelenID)
-        Postislem.ozet = ZekaOzet
-        Postislem.sonucPost = icerik
-        Postislem.Akibeti = "Tamamlandi"
+        Postislem.AltBasliklar = Alt
+        Postislem.Akibeti = "AltBaslikKontrol"
         Postislem.save()
 
         if Postislem.id is None:
