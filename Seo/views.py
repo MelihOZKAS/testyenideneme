@@ -198,7 +198,7 @@ def post_add(request):
 
 
 @csrf_exempt
-def get_random_kontrol(request):
+def ai_cek(request):
     if request.method == 'POST':
         field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
@@ -208,3 +208,25 @@ def get_random_kontrol(request):
             return HttpResponse(Sonucu)
         else:
             return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
+
+
+
+@csrf_exempt
+def ai_add(request):
+    if request.method == 'POST':
+        # Gelen POST isteğindeki değerleri alın
+        ZekaOzet = request.POST.get('ZekaOzet')
+        icerik = request.POST.get('icerik')
+        GelenID = request.POST.get('GelenID')
+
+
+        Postislem = Kontrol.objects.get(pk=GelenID)
+        Postislem.ozet = ZekaOzet
+        Postislem.sonucPost = icerik
+        Postislem.Akibeti = "Tamamlandi"
+        Postislem.save()
+
+        if Postislem.id is None:
+            return HttpResponse("Post kaydedilemedi.")
+        else:
+            return HttpResponse("Şükürler Olsun Post başarıyla kaydedildi. ID: " + str(Postislem.id))

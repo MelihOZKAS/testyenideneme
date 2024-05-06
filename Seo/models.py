@@ -141,6 +141,8 @@ class Kontrol(models.Model):
     icerik3 = RichTextField(null=True, blank=True)
     icerik4 = RichTextField(null=True, blank=True)
     icerik5 = RichTextField(null=True, blank=True)
+    sonucPost = RichTextField(null=True, blank=True)
+    ozet = models.TextField(blank=True, verbose_name="Özet")
 
     meta_description = models.TextField(blank=True, verbose_name="Meta Açıklama")
     keywords = models.CharField(max_length=255,blank=True,verbose_name="Anahtar Kelimeler")
