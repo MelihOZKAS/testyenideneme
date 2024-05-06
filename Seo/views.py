@@ -218,7 +218,7 @@ def ai_cek_Alt_Baslik_Cek(request):
         kontrols = Kontrol.objects.filter(Akibeti=Tur)
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            random_kontrol.Post_Turu = "YoldaAltBaslik"
+            random_kontrol.Akibeti = "YoldaAltBaslik"
             random_kontrol.save()
             Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik}"
             return HttpResponse(Sonucu)
