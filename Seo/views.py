@@ -212,7 +212,44 @@ def ai_cek(request):
 
 
 @csrf_exempt
+def ai_cek_Alt_Baslik_Cek(request):
+    if request.method == 'POST':
+        Tur = request.POST.get('Tur')
+        kontrols = Kontrol.objects.filter(Akibeti=Tur)
+        if kontrols.exists():
+            random_kontrol = kontrols.order_by('?').first()
+            random_kontrol.Post_Turu = "YoldaAltBaslik"
+            random_kontrol.save()
+            Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik}"
+            return HttpResponse(Sonucu)
+        else:
+            return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
+
+
+
+
+
+@csrf_exempt
 def ai_add(request):
+    if request.method == 'POST':
+        # Gelen POST isteğindeki değerleri alın
+        ZekaOzet = request.POST.get('ZekaOzet')
+        icerik = request.POST.get('icerik')
+        GelenID = request.POST.get('GelenID')
+
+
+        Postislem = Kontrol.objects.get(pk=GelenID)
+        Postislem.ozet = ZekaOzet
+        Postislem.sonucPost = icerik
+        Postislem.Akibeti = "Tamamlandi"
+        Postislem.save()
+
+        if Postislem.id is None:
+            return HttpResponse("Post kaydedilemedi.")
+        else:
+            return HttpResponse("Şükürler Olsun Post başarıyla kaydedildi. ID: " + str(Postislem.id))
+@csrf_exempt
+def ai_alt_baslik_add(request):
     if request.method == 'POST':
         # Gelen POST isteğindeki değerleri alın
         ZekaOzet = request.POST.get('ZekaOzet')

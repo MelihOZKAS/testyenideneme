@@ -113,7 +113,8 @@ class Kontrol(models.Model):
         ('AltBaslikYap', 'AltBaslikYap'),
         ('KullanimaHazir', 'KullanimaHazir'),
         ('Tamamlandi', 'Tamamlandi'),
-        ('Yolda', 'Yolda'),
+        ('YoldaAltBaslik', 'YoldaAltBaslik'),
+        ('YoldaMakale', 'YoldaMakale'),
     ]
 
 
