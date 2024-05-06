@@ -108,11 +108,11 @@ class PostKategori(models.Model):
 
 class Kontrol(models.Model):
     kontrol = [
-        ('Kullan', 'Kullan'),
-        ('Salla', 'Salla'),
         ('Beklemede', 'Beklemede'),
+        ('MakaleYap', 'MakaleYap'),
+        ('AltBaslikYap', 'AltBaslikYap'),
+        ('KullanimaHazir', 'KullanimaHazir'),
         ('Tamamlandi', 'Tamamlandi'),
-        ('Hazirla', 'Hazirla'),
         ('Yolda', 'Yolda'),
     ]
 
@@ -136,6 +136,7 @@ class Kontrol(models.Model):
     slug = models.CharField(max_length=255, null=True,blank=True)
     h1 = models.CharField(max_length=255,blank=True, null=True)
     Post_Turu = models.ForeignKey(PostKategori, null=True, on_delete=models.SET_NULL)
+    AltBasliklar = models.TextField(blank=True, verbose_name="Özet")
     icerik = RichTextField(null=True, blank=True)
     icerik2 = RichTextField(null=True, blank=True)
     icerik3 = RichTextField(null=True, blank=True)
