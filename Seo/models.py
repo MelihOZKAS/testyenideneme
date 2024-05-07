@@ -111,12 +111,14 @@ class Kontrol(models.Model):
         ('Beklemede', 'Beklemede'),
         ('AltBaslikYap', 'AltBaslikYap'),
         ('AltBaslikKontrol', 'AltBaslikKontrol'),
+        ('YoldaAltBaslik', 'YoldaAltBaslik'),
         ('MakaleYap', 'MakaleYap'),
+        ('YoldaMakale', 'YoldaMakale'),
         ('MakaleKontrol', 'MakaleKontrol'),
         ('KullanimaHazir', 'KullanimaHazir'),
         ('Tamamlandi', 'Tamamlandi'),
-        ('YoldaAltBaslik', 'YoldaAltBaslik'),
-        ('YoldaMakale', 'YoldaMakale'),
+
+
     ]
 
 
@@ -147,6 +149,7 @@ class Kontrol(models.Model):
     icerik5 = RichTextField(null=True, blank=True)
     sonucPost = RichTextField(null=True, blank=True)
     ozet = models.TextField(blank=True, verbose_name="Özet")
+    faq = models.TextField(blank=True, verbose_name="Faq")
 
     meta_description = models.TextField(blank=True, verbose_name="Meta Açıklama")
     keywords = models.CharField(max_length=255,blank=True,verbose_name="Anahtar Kelimeler")

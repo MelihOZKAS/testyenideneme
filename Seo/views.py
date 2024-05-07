@@ -225,7 +225,19 @@ def ai_cek_Alt_Baslik_Cek(request):
         else:
             return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
 
-
+@csrf_exempt
+def ai_makale_cek(request):
+    if request.method == 'POST':
+        Tur = request.POST.get('Tur')
+        kontrols = Kontrol.objects.filter(Akibeti=Tur)
+        if kontrols.exists():
+            random_kontrol = kontrols.order_by('?').first()
+            random_kontrol.Akibeti = "YoldaMakale"
+            random_kontrol.save()
+            Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik}|={random_kontrol.AltBasliklar}"
+            return HttpResponse(Sonucu)
+        else:
+            return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
 
 
 
