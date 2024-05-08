@@ -146,7 +146,7 @@ class Kontrol(models.Model):
     Post_Turu = models.ForeignKey(PostKategori, null=True, on_delete=models.SET_NULL)
     AltBasliklar = models.TextField(blank=True, verbose_name="Alt Başlıklar")
     icerikGelen = RichTextField(null=True, blank=True)
-    icerikmain = RichTextField(null=True, blank=True)
+    icerik0 = RichTextField(null=True, blank=True)
     icerik2 = RichTextField(null=True, blank=True)
     icerik3 = RichTextField(null=True, blank=True)
     icerik4 = RichTextField(null=True, blank=True)

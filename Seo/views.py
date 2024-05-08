@@ -245,7 +245,7 @@ def ai_makale_cek(request):
 def ai_add(request):
     if request.method == 'POST':
         # Gelen POST isteğindeki değerleri alın
-        icerikmain = request.POST.get('main')
+        icerik0 = request.POST.get('main')
         icerik1 = request.POST.get('icerik1')
         icerik2 = request.POST.get('icerik2')
         icerik3 = request.POST.get('icerik3')
@@ -263,7 +263,7 @@ def ai_add(request):
 
         Postislem = Kontrol.objects.get(pk=GelenID)
         Postislem.ozet = ZekaOzet
-        Postislem.icerikmain = icerikmain
+        Postislem.icerik0 = icerik0
         Postislem.icerik = icerik1
         Postislem.icerik2 = icerik2
         Postislem.icerik3 = icerik3
