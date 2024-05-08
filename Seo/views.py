@@ -223,7 +223,7 @@ def ai_cek_Alt_Baslik_Cek(request):
             Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerikGelen}"
             return HttpResponse(Sonucu)
         else:
-            return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
+            return HttpResponse("Alt Baslik bulunamadı")
 
 @csrf_exempt
 def ai_makale_cek(request):
