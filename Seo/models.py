@@ -135,6 +135,9 @@ class Kontrol(models.Model):
         ('ENG', 'ENG'),
         ('TR', 'TR'),
         ('De', 'DE'),
+        ('İtaly', 'İtaly'),
+        ('Espanyol', 'Espanyol'),
+        ('France', 'France'),
     ]
 
     title = models.CharField(max_length=255)
@@ -147,6 +150,11 @@ class Kontrol(models.Model):
     icerik3 = RichTextField(null=True, blank=True)
     icerik4 = RichTextField(null=True, blank=True)
     icerik5 = RichTextField(null=True, blank=True)
+    icerik6 = RichTextField(null=True, blank=True)
+    icerik7 = RichTextField(null=True, blank=True)
+    icerik8 = RichTextField(null=True, blank=True)
+    icerik9 = RichTextField(null=True, blank=True)
+    icerik10 = RichTextField(null=True, blank=True)
     sonucPost = RichTextField(null=True, blank=True)
     ozet = models.TextField(blank=True, verbose_name="Özet")
     faq = models.TextField(blank=True, verbose_name="Faq")
