@@ -246,14 +246,36 @@ def ai_add(request):
     if request.method == 'POST':
         # Gelen POST isteğindeki değerleri alın
         ZekaOzet = request.POST.get('ZekaOzet')
-        icerik = request.POST.get('icerik')
+        icerik1 = request.POST.get('icerik1')
+        icerik2 = request.POST.get('icerik2')
+        icerik3 = request.POST.get('icerik3')
+        icerik4 = request.POST.get('icerik4')
+        icerik5 = request.POST.get('icerik5')
+        icerik6 = request.POST.get('icerik6')
+        icerik7 = request.POST.get('icerik7')
+        icerik8 = request.POST.get('icerik8')
+        icerik9 = request.POST.get('icerik9')
+        icerik10 = request.POST.get('icerik10')
+        extra = request.POST.get('extra')
+        faq = request.POST.get('faq')
         GelenID = request.POST.get('GelenID')
 
 
         Postislem = Kontrol.objects.get(pk=GelenID)
         Postislem.ozet = ZekaOzet
-        Postislem.sonucPost = icerik
-        Postislem.Akibeti = "Tamamlandi"
+        Postislem.sonucPost = extra
+        Postislem.icerik = icerik1
+        Postislem.icerik2 = icerik2
+        Postislem.icerik3 = icerik3
+        Postislem.icerik4 = icerik4
+        Postislem.icerik5 = icerik5
+        Postislem.icerik6 = icerik6
+        Postislem.icerik7 = icerik7
+        Postislem.icerik8 = icerik8
+        Postislem.icerik9 = icerik9
+        Postislem.icerik10 = icerik10
+        Postislem.faq = faq
+        Postislem.Akibeti = "MakaleKontrol"
         Postislem.save()
 
         if Postislem.id is None:
