@@ -189,7 +189,7 @@ class Kontrol(models.Model):
         return self.title
 
     def kelime_sayisi(self):
-        return len(self.icerik0.split())
+        return len(self.icerikGelen.split())
 
 
 
