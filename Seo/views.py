@@ -237,7 +237,7 @@ def ai_makale_cek(request):
             Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik}|={random_kontrol.AltBasliklar}"
             return HttpResponse(Sonucu)
         else:
-            return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
+            return HttpResponse("Kontrol bulunamadı")
 
 
 
@@ -245,7 +245,7 @@ def ai_makale_cek(request):
 def ai_add(request):
     if request.method == 'POST':
         # Gelen POST isteğindeki değerleri alın
-        ZekaOzet = request.POST.get('ZekaOzet')
+        icerikmain = request.POST.get('main')
         icerik1 = request.POST.get('icerik1')
         icerik2 = request.POST.get('icerik2')
         icerik3 = request.POST.get('icerik3')
@@ -256,14 +256,14 @@ def ai_add(request):
         icerik8 = request.POST.get('icerik8')
         icerik9 = request.POST.get('icerik9')
         icerik10 = request.POST.get('icerik10')
-        extra = request.POST.get('extra')
+        ZekaOzet = request.POST.get('ZekaOzet')
         faq = request.POST.get('faq')
         GelenID = request.POST.get('GelenID')
 
 
         Postislem = Kontrol.objects.get(pk=GelenID)
         Postislem.ozet = ZekaOzet
-        Postislem.sonucPost = extra
+        Postislem.icerikmain = icerikmain
         Postislem.icerik = icerik1
         Postislem.icerik2 = icerik2
         Postislem.icerik3 = icerik3
