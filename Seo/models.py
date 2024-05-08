@@ -145,7 +145,7 @@ class Kontrol(models.Model):
     h1 = models.CharField(max_length=255,blank=True, null=True)
     Post_Turu = models.ForeignKey(PostKategori, null=True, on_delete=models.SET_NULL)
     AltBasliklar = models.TextField(blank=True, verbose_name="Alt Başlıklar")
-    icerik = RichTextField(null=True, blank=True)
+    icerik1 = RichTextField(null=True, blank=True)
     icerik2 = RichTextField(null=True, blank=True)
     icerik3 = RichTextField(null=True, blank=True)
     icerik4 = RichTextField(null=True, blank=True)
@@ -155,7 +155,7 @@ class Kontrol(models.Model):
     icerik8 = RichTextField(null=True, blank=True)
     icerik9 = RichTextField(null=True, blank=True)
     icerik10 = RichTextField(null=True, blank=True)
-    sonucPost = RichTextField(null=True, blank=True)
+    icerikmain = RichTextField(null=True, blank=True)
     ozet = models.TextField(blank=True, verbose_name="Özet")
     faq = models.TextField(blank=True, verbose_name="Faq")
 
