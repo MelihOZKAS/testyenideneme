@@ -176,7 +176,7 @@ def post_add(request):
         title = request.POST.get('title')
         h1 = request.POST.get('h1')
         Post_Turu = request.POST.get('Post_Turu')
-        icerik = request.POST.get('icerik')
+        icerik1 = request.POST.get('icerik1')
         meta_description = request.POST.get('meta_description')
         key = request.POST.get('keywords')
         Kaynak_Linki = request.POST.get('Kaynak_Linki')
@@ -188,7 +188,7 @@ def post_add(request):
         Post_Turu_Gelen = PostKategori.objects.get(Title=Post_Turu)
 
         title, slug = create_unique_title_slug(title)
-        siir_masal = Kontrol(title=title,  slug=slug, h1=h1, Post_Turu=Post_Turu_Gelen, icerik=icerik, keywords=key, meta_description=meta_description, Akibeti="Beklemede", Kaynak_Linki=Kaynak_Linki, Kaynak_Dili=Kaynak_Dili, Kaynak_Ana_link=Kaynak_Ana_Link_Gelen)
+        siir_masal = Kontrol(title=title,  slug=slug, h1=h1, Post_Turu=Post_Turu_Gelen, icerik1=icerik1, keywords=key, meta_description=meta_description, Akibeti="Beklemede", Kaynak_Linki=Kaynak_Linki, Kaynak_Dili=Kaynak_Dili, Kaynak_Ana_link=Kaynak_Ana_Link_Gelen)
         siir_masal.save()
         if siir_masal.id is None:
             return HttpResponse("Post kaydedilemedi.")
@@ -204,7 +204,7 @@ def ai_cek(request):
         kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            Sonucu = f"{random_kontrol.pk}|={random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik}|={random_kontrol.Kaynak_Linki}"
+            Sonucu = f"{random_kontrol.pk}|={random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik1}|={random_kontrol.Kaynak_Linki}"
             return HttpResponse(Sonucu)
         else:
             return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
@@ -220,7 +220,7 @@ def ai_cek_Alt_Baslik_Cek(request):
             random_kontrol = kontrols.order_by('?').first()
             random_kontrol.Akibeti = "YoldaAltBaslik"
             random_kontrol.save()
-            Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik}"
+            Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik1}"
             return HttpResponse(Sonucu)
         else:
             return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
@@ -234,7 +234,7 @@ def ai_makale_cek(request):
             random_kontrol = kontrols.order_by('?').first()
             random_kontrol.Akibeti = "YoldaMakale"
             random_kontrol.save()
-            Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik}|={random_kontrol.AltBasliklar}"
+            Sonucu = f"{random_kontrol.pk}|={random_kontrol.icerik1}|={random_kontrol.AltBasliklar}"
             return HttpResponse(Sonucu)
         else:
             return HttpResponse("Kontrol bulunamadı")
