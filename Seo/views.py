@@ -264,7 +264,7 @@ def ai_add(request):
         Postislem = Kontrol.objects.get(pk=GelenID)
         Postislem.ozet = ZekaOzet
         Postislem.icerik0 = icerik0
-        Postislem.icerik = icerik1
+        Postislem.icerik1 = icerik1
         Postislem.icerik2 = icerik2
         Postislem.icerik3 = icerik3
         Postislem.icerik4 = icerik4

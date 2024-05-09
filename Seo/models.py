@@ -147,6 +147,7 @@ class Kontrol(models.Model):
     AltBasliklar = models.TextField(blank=True, verbose_name="Alt Başlıklar")
     icerikGelen = RichTextField(null=True, blank=True)
     icerik0 = RichTextField(null=True, blank=True)
+    icerik1 = RichTextField(null=True, blank=True)
     icerik2 = RichTextField(null=True, blank=True)
     icerik3 = RichTextField(null=True, blank=True)
     icerik4 = RichTextField(null=True, blank=True)
