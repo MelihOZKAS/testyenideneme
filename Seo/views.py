@@ -201,13 +201,14 @@ def post_add(request):
 def ai_cek(request):
     if request.method == 'POST':
         field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
-        kontrols = Kontrol.objects.filter(Akibeti='Kullan', **{field: 'Kullan'})
+        kontrols = Kontrol.objects.filter(Akibeti__in=['KullanimaHazir', 'Tamamlandi'], **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
             Sonucu = f"{random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik0}|={random_kontrol.icerik1}|={random_kontrol.icerik2}|={random_kontrol.icerik3}|={random_kontrol.icerik4}|={random_kontrol.icerik5}|={random_kontrol.icerik6}|={random_kontrol.icerik7}|={random_kontrol.icerik8}|={random_kontrol.icerik9}|={random_kontrol.icerik10}|={random_kontrol.Kaynak_Linki}"
             return HttpResponse(Sonucu)
         else:
-            return JsonResponse({'error': 'Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.'})
+            return HttpResponse('Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.')
+
 
 
 
