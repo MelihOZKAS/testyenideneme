@@ -1,4 +1,4 @@
-from django.shortcuts import render,HttpResponse,get_object_or_404,reverse
+from django.shortcuts import render, HttpResponse, get_object_or_404, reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.text import slugify
 from django.core.paginator import Paginator
@@ -26,10 +26,6 @@ def home3(request):
         return HttpResponse(f'Sitemiz Şu an Yapımda')
 
 
-
-
-
-
 def create_unique_title_slug(title):
     slug = slugify(title)
     unique_slug = slug
@@ -53,7 +49,6 @@ def home(request):
         return render(request, 'amp/blog.amp.html')
     else:
         return HttpResponse(f'Sitemiz Şu an Yapımda')
-
 
 
 class StoryPreviewView(View):
@@ -113,7 +108,6 @@ def EnderunNew(request, post_slug):
         'keywords': keywords,
         'PostEndrun': PostEndrun,
 
-
     }
 
     if 'amphtml' in user_agent or 'mobile' in user_agent or 'safari' in user_agent in user_agent:
@@ -143,6 +137,7 @@ def mahsulyakala(request):
     else:
         return JsonResponse({"method": request.method, "headers": dict(request.headers)})
 
+
 @csrf_exempt
 def mahsullistesicek(request):
     if request.method == 'POST':
@@ -158,7 +153,8 @@ def mahsullistesicek(request):
 def mahsulcek(request):
     if request.method == 'POST':
         tarla_link = request.POST.get('Tarla_Link')
-        mahsul_cek = Mahsul.objects.filter(Tarla_Link=tarla_link, Akibeti="Beklemede").order_by('olusturma_tarihi').first()
+        mahsul_cek = Mahsul.objects.filter(Tarla_Link=tarla_link, Akibeti="Beklemede").order_by(
+            'olusturma_tarihi').first()
         if mahsul_cek is not None:
             mahsul_cek.Akibeti = "Tamamlandi"
             mahsul_cek.save()
@@ -188,7 +184,9 @@ def post_add(request):
         Post_Turu_Gelen = PostKategori.objects.get(Title=Post_Turu)
 
         title, slug = create_unique_title_slug(title)
-        siir_masal = Kontrol(title=title,  slug=slug, h1=h1, Post_Turu=Post_Turu_Gelen, icerikGelen=icerikGelen, keywords=key, meta_description=meta_description, Akibeti="Beklemede", Kaynak_Linki=Kaynak_Linki, Kaynak_Dili=Kaynak_Dili, Kaynak_Ana_link=Kaynak_Ana_Link_Gelen)
+        siir_masal = Kontrol(title=title, slug=slug, h1=h1, Post_Turu=Post_Turu_Gelen, icerikGelen=icerikGelen,
+                             keywords=key, meta_description=meta_description, Akibeti="Beklemede",
+                             Kaynak_Linki=Kaynak_Linki, Kaynak_Dili=Kaynak_Dili, Kaynak_Ana_link=Kaynak_Ana_Link_Gelen)
         siir_masal.save()
         if siir_masal.id is None:
             return HttpResponse("Post kaydedilemedi.")
@@ -196,20 +194,18 @@ def post_add(request):
             return HttpResponse("Post başarıyla kaydedildi. ID: " + str(siir_masal.id))
 
 
-
 @csrf_exempt
 def ai_cek(request):
     if request.method == 'POST':
-        field = request.POST.get('field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
+        field = request.POST.get(
+            'field')  # field parametresi, hangi alana göre filtreleme yapılacağını belirtir (ör. 'kidsStories')
         kontrols = Kontrol.objects.filter(Akibeti__in=['KullanimaHazir', 'Tamamlandi'], **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            Sonucu = f"{random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik0}|={random_kontrol.icerik1}|={random_kontrol.icerik2}|={random_kontrol.icerik3}|={random_kontrol.icerik4}|={random_kontrol.icerik5}|={random_kontrol.icerik6}|={random_kontrol.icerik7}|={random_kontrol.icerik8}|={random_kontrol.icerik9}|={random_kontrol.icerik10}|={random_kontrol.Kaynak_Linki}"
+            Sonucu = f"{random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik0}|={random_kontrol.icerik1icerik1}|={random_kontrol.icerik2}|={random_kontrol.icerik3}|={random_kontrol.icerik4}|={random_kontrol.icerik5  }|={random_kontrol.icerik6}|={random_kontrol.icerik7}|={random_kontrol.icerik8}|={random_kontrol.icerik9}|={random_kontrol.icerik10}|={random_kontrol.Kaynak_Linki}|={random_kontrol.ozet}|={random_kontrol.faq}"
             return HttpResponse(Sonucu)
         else:
             return HttpResponse('Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.')
-
-
 
 
 @csrf_exempt
@@ -226,6 +222,7 @@ def ai_cek_Alt_Baslik_Cek(request):
         else:
             return HttpResponse("Alt Baslik bulunamadı")
 
+
 @csrf_exempt
 def ai_makale_cek(request):
     if request.method == 'POST':
@@ -239,7 +236,6 @@ def ai_makale_cek(request):
             return HttpResponse(Sonucu)
         else:
             return HttpResponse("Kontrol bulunamadı")
-
 
 
 @csrf_exempt
@@ -260,7 +256,6 @@ def ai_add(request):
         ZekaOzet = request.POST.get('ZekaOzet')
         faq = request.POST.get('faq')
         GelenID = request.POST.get('GelenID')
-
 
         Postislem = Kontrol.objects.get(pk=GelenID)
         Postislem.ozet = ZekaOzet
@@ -283,14 +278,14 @@ def ai_add(request):
             return HttpResponse("Post kaydedilemedi.")
         else:
             return HttpResponse("Şükürler Olsun Post başarıyla kaydedildi. ID: " + str(Postislem.id))
+
+
 @csrf_exempt
 def ai_alt_baslik_add(request):
     if request.method == 'POST':
         # Gelen POST isteğindeki değerleri alın
         GelenID = request.POST.get('GelenID')
         Alt = request.POST.get('Alt')
-
-
 
         Postislem = Kontrol.objects.get(pk=GelenID)
         Postislem.AltBasliklar = Alt
