@@ -130,6 +130,12 @@ class Kontrol(models.Model):
     ]
 
 
+    Para = [
+        ('ucuz', 'ucuz'),
+        ('pahalı', 'pahalı'),
+    ]
+
+
 
     Dili = [
         ('ENG', 'ENG'),
@@ -145,6 +151,7 @@ class Kontrol(models.Model):
     h1 = models.CharField(max_length=255,blank=True, null=True)
     Post_Turu = models.ForeignKey(PostKategori, null=True, on_delete=models.SET_NULL)
     AltBasliklar = models.TextField(blank=True, verbose_name="Alt Başlıklar")
+    Hangisi = models.CharField(max_length=255, choices=Para, null=True, blank=True)
     icerikGelen = RichTextField(null=True, blank=True)
     icerik0 = RichTextField(null=True, blank=True)
     icerik1 = RichTextField(null=True, blank=True)
