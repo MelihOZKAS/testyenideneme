@@ -202,7 +202,7 @@ def ai_cek(request):
         kontrols = Kontrol.objects.filter(Akibeti__in=['KullanimaHazir', 'Tamamlandi'], **{field: 'Kullan'})
         if kontrols.exists():
             random_kontrol = kontrols.order_by('?').first()
-            Sonucu = f"{random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik0}|={random_kontrol.icerik1}|={random_kontrol.icerik2}|={random_kontrol.icerik3}|={random_kontrol.icerik4}|={random_kontrol.icerik5  }|={random_kontrol.icerik6}|={random_kontrol.icerik7}|={random_kontrol.icerik8}|={random_kontrol.icerik9}|={random_kontrol.icerik10}|={random_kontrol.Kaynak_Linki}|={random_kontrol.ozet}|={random_kontrol.faq}"
+            Sonucu = f"{random_kontrol.title}|={random_kontrol.h1}|={random_kontrol.Post_Turu}|={random_kontrol.meta_description}|={random_kontrol.keywords}|={random_kontrol.icerik0}|={random_kontrol.icerik1}|={random_kontrol.icerik2}|={random_kontrol.icerik3}|={random_kontrol.icerik4}|={random_kontrol.icerik5  }|={random_kontrol.icerik6}|={random_kontrol.icerik7}|={random_kontrol.icerik8}|={random_kontrol.icerik9}|={random_kontrol.icerik10}|={random_kontrol.Kaynak_Linki}|={random_kontrol.ozet}|={random_kontrol.faq}|={random_kontrol.AltBasliklar}"
             return HttpResponse(Sonucu)
         else:
             return HttpResponse('Belirtilen koşullara uygun bir kontrol nesnesi bulunamadı.')
