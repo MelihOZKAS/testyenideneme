@@ -177,6 +177,7 @@ class Kontrol(models.Model):
     cocukmasali = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     kidsStories = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     yuksekteknoloji = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
+    erkekbebekisimleri = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     hamilelik = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     bayanlaraozel = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
     ailerehberi = models.CharField(max_length=255, choices=islem, null=True, blank=True, default="Kontrol")
